@@ -26,6 +26,9 @@ importers:
       class-validator:
         specifier: ^0.14.3
         version: 0.14.3
+      mapped-types:
+        specifier: ^0.0.1
+        version: 0.0.1
       reflect-metadata:
         specifier: ^0.2.2
         version: 0.2.2
@@ -2492,6 +2495,10 @@ packages:
 
   makeerror@1.0.12:
     resolution: {integrity: sha512-JmqCvUhmt43madlpFzG4BQzG2Z3m6tvQDNKdClZnO3VbIudJYmxsT0FNJMeiB2+JTSlTQTSbU8QdesVmwJcmLg==}
+
+  mapped-types@0.0.1:
+    resolution: {integrity: sha512-9WtZd+/WCFNmkLJh5LdEFQq4QJJ60E+H86Xus35D5DjyuD6O15F9OFOaGLkBJscJWh91WIzYv1OWZhrHslm3fg==}
+    engines: {node: '>= 4'}
 
   math-intrinsics@1.1.0:
     resolution: {integrity: sha512-/IXtbwEk5HTPyEwyKX6hGkYXxM9nbj64B+ilVJnC/R6B0pH5G4V3b0pVbL7DBj4tkhBAppbQUlf6F6Xl9LHu1g==}
@@ -6224,6 +6231,8 @@ snapshots:
   makeerror@1.0.12:
     dependencies:
       tmpl: 1.0.5
+
+  mapped-types@0.0.1: {}
 
   math-intrinsics@1.1.0: {}
 

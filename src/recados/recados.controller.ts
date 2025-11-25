@@ -1,6 +1,7 @@
-import { Body, Controller, Get, Param, Post } from '@nestjs/common';
+import { Body, Controller, Delete, Get, Param, Patch, Post } from '@nestjs/common';
 import { RecadosService } from './recados.service';
 import { CreateRecadoDto } from './dto/create-recado.dto';
+import { UpdateRecadoDto } from './dto/update-recado.dto';
 
 @Controller('recados')
 export class RecadosController {
@@ -18,5 +19,15 @@ export class RecadosController {
   @Post()
   async create(@Body() createRecadoDto: CreateRecadoDto): Promise<string> {
     return await this.recadosService.create(createRecadoDto);
+  }
+
+  @Patch(':id')
+  update(@Param('id') id: string, @Body() updateRecadoDto: UpdateRecadoDto): string {
+    return `This action updates a recado with id ${id}`;
+  }
+
+  @Delete(':id')
+  remove(@Param('id') id: string): string {
+    return `This action removes a recado with id ${id}`;
   }
 }
