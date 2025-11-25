@@ -1,9 +1,9 @@
 import { Body, Controller, Get, Param, Post } from '@nestjs/common';
 import { RecadosService } from './recados.service';
+import { CreateRecadoDto } from './dto/create-recado.dto';
 
 @Controller('recados')
 export class RecadosController {
-
   constructor(private readonly recadosService: RecadosService) {}
   @Get()
   findAll(): string {
@@ -16,7 +16,7 @@ export class RecadosController {
   }
 
   @Post()
-  create(@Body() body: any): string {
-    return `This action creates a new recado with title ${body.title} and content ${body.content}`;
+  async create(@Body() createRecadoDto: CreateRecadoDto): Promise<string> {
+    return await this.recadosService.create(createRecadoDto);
   }
 }
