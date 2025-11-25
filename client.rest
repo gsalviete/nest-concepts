@@ -1,0 +1,16 @@
+@baseUrl = http://localhost:3000
+
+### RecadosModuleGet
+
+# @name RecadosModuleGet
+GET {{baseUrl}}/recados/213
+
+### RecadoModulePost
+# @name RecadoModulePost
+POST {{baseUrl}}/recados
+Content-Type: application/json
+
+{
+    "title" : "Recado Novo",
+    "content" : "Conteudo do recado novo" 
+}
