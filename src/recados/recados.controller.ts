@@ -2,6 +2,7 @@ import { Body, Controller, Delete, Get, Param, Patch, Post } from '@nestjs/commo
 import { RecadosService } from './recados.service';
 import { CreateRecadoDto } from './dto/create-recado.dto';
 import { UpdateRecadoDto } from './dto/update-recado.dto';
+import { Recado } from './entities/recado.entity';
 
 @Controller('recados')
 export class RecadosController {
@@ -17,8 +18,8 @@ export class RecadosController {
   }
 
   @Post()
-  async create(@Body() createRecadoDto: CreateRecadoDto): Promise<string> {
-    return await this.recadosService.create(createRecadoDto);
+  async create(@Body() createRecadoDto: CreateRecadoDto): Promise<Recado> {
+    return this.recadosService.create(createRecadoDto);
   }
 
   @Patch(':id')

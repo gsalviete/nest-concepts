@@ -1,19 +1,26 @@
 import { Injectable, NotFoundException } from '@nestjs/common';
 import { CreateRecadoDto } from './dto/create-recado.dto';
+import { InjectRepository } from '@nestjs/typeorm';
+import { Repository } from 'typeorm';
+import { Recado } from './entities/recado.entity';
+
 
 @Injectable()
 export class RecadosService {
+  constructor(
+    @InjectRepository(Recado) private recadoRepository: Repository<Recado>
+  ) {}
+
   throwNotFoundError() {
     throw new NotFoundException('Recado not found');
   }
 
-  findAll(): string {
-    return 'This action returns all recados';
+  findAll(): Promise<Recado[]> {
+    return this.recadoRepository.find();
   }
 
-  async create(createRecadoDto: CreateRecadoDto): Promise<string> {
-    // Here you would typically handle the creation logic,
-    // such as saving the recado to a database.
-    return await 'This action adds a new recado';
+  async create(createRecadoDto: CreateRecadoDto): Promise<Recado> {
+    const recado = this.recadoRepository.create(createRecadoDto);
+    return await this.recadoRepository.save(recado);
   }
 }
