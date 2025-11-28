@@ -15,12 +15,39 @@ export class RecadosService {
     throw new NotFoundException('Recado not found');
   }
 
-  findAll(): Promise<Recado[]> {
-    return this.recadoRepository.find();
+  async findAll(): Promise<Recado[]> {
+    return await this.recadoRepository.find();
+  }
+
+  async findOne(id: number): Promise<Recado> {
+    const recado = await this.recadoRepository.findOneBy({ id});
+    if(!recado){
+      throw new NotFoundException(`Recado with id ${id} not found`);
+    }
+    return recado;
   }
 
   async create(createRecadoDto: CreateRecadoDto): Promise<Recado> {
     const recado = this.recadoRepository.create(createRecadoDto);
     return await this.recadoRepository.save(recado);
+  }
+
+  async update(id: number, updateRecadoDto: Partial<Recado>): Promise<Recado> {
+    const recado = await this.recadoRepository.preload({
+      id: id,
+      ...updateRecadoDto,
+    });
+    if(!recado){
+      throw new NotFoundException(`Recado with id ${id} not found`);
+    }
+    return await this.recadoRepository.save(recado);
+  }
+
+  async remove(id: number): Promise<void> {
+    const recado = await this.recadoRepository.findOneBy({ id });
+    if (!recado) {
+      throw new NotFoundException(`Recado with id ${id} not found`);
+    }
+    await this.recadoRepository.remove(recado);
   }
 }
