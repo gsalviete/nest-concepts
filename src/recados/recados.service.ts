@@ -3,6 +3,7 @@ import { CreateRecadoDto } from './dto/create-recado.dto';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import { Recado } from './entities/recado.entity';
+import { UpdateRecadoDto } from './dto/update-recado.dto';
 
 
 @Injectable()
@@ -32,7 +33,7 @@ export class RecadosService {
     return await this.recadoRepository.save(recado);
   }
 
-  async update(id: number, updateRecadoDto: Partial<Recado>): Promise<Recado> {
+  async update(id: number, updateRecadoDto: UpdateRecadoDto): Promise<Recado> {
     const recado = await this.recadoRepository.preload({
       id: id,
       ...updateRecadoDto,

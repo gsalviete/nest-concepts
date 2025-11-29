@@ -3,6 +3,6 @@ export class Recado {
   texto: string;
   de: string;
   para: string;
-  lido: boolean;
-  data: Date;
+  lido: boolean = false;
+  data: Date = new Date();
 }
