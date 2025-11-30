@@ -1,4 +1,4 @@
-import { Column, Entity, PrimaryGeneratedColumn } from 'typeorm';
+import { Column, Entity, PrimaryGeneratedColumn, CreateDateColumn, UpdateDateColumn } from 'typeorm';
 
 @Entity()
 export class Recado {
@@ -18,5 +18,11 @@ export class Recado {
   lido: boolean;
   
   @Column()
-  data: Date = new Date();
+  data: Date;
+
+  @CreateDateColumn()
+  CreatedAt?: Date;
+
+  @UpdateDateColumn()
+  UpdatedAt?: Date;
 }
