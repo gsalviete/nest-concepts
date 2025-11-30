@@ -14,8 +14,8 @@ export class Recado {
   @Column()
   para: string;
   
-  @Column()
-  lido: boolean = false;
+  @Column({ default: false})
+  lido: boolean;
   
   @Column()
   data: Date = new Date();
