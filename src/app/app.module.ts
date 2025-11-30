@@ -17,7 +17,7 @@ import { Recado } from 'src/recados/entities/recado.entity';
       database: 'nestdb',
       entities: [Recado],
       synchronize: true,
-    })
+    }),
   ],
   controllers: [AppController],
   providers: [AppService],

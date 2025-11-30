@@ -5,11 +5,10 @@ import { Repository } from 'typeorm';
 import { Recado } from './entities/recado.entity';
 import { UpdateRecadoDto } from './dto/update-recado.dto';
 
-
 @Injectable()
 export class RecadosService {
   constructor(
-    @InjectRepository(Recado) private recadoRepository: Repository<Recado>
+    @InjectRepository(Recado) private recadoRepository: Repository<Recado>,
   ) {}
 
   throwNotFoundError() {
@@ -21,8 +20,8 @@ export class RecadosService {
   }
 
   async findOne(id: number): Promise<Recado> {
-    const recado = await this.recadoRepository.findOneBy({ id});
-    if(!recado){
+    const recado = await this.recadoRepository.findOneBy({ id });
+    if (!recado) {
       throw new NotFoundException(`Recado with id ${id} not found`);
     }
     return recado;
@@ -38,7 +37,7 @@ export class RecadosService {
       id: id,
       ...updateRecadoDto,
     });
-    if(!recado){
+    if (!recado) {
       throw new NotFoundException(`Recado with id ${id} not found`);
     }
     return await this.recadoRepository.save(recado);
