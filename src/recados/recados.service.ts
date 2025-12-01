@@ -20,7 +20,7 @@ export class RecadosService {
   }
 
   async findOne(id: number): Promise<Recado> {
-    const recado = await this.recadoRepository.findOneBy({ id });
+    const recado = await this.recadoRepository.findOne({ where: { id } });
     if (!recado) {
       throw new NotFoundException(`Recado with id ${id} not found`);
     }
