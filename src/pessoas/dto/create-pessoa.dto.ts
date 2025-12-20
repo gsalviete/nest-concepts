@@ -8,4 +8,8 @@ nome: string;
 @IsNumber()
 @IsNotEmpty()
 idade: number;
+
+@IsString()
+@IsNotEmpty()
+email: string;
 }
