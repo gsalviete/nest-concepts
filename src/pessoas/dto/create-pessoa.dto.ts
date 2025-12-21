@@ -1,15 +1,15 @@
-import { IsString, IsNotEmpty, IsNumber } from 'class-validator';
+import { IsString, IsNotEmpty, IsNumber, IsEmail } from 'class-validator';
 
 export class CreatePessoaDto {
 @IsString()
 @IsNotEmpty()
 nome: string;
 
-@IsNumber()
-@IsNotEmpty()
-idade: number;
-
 @IsString()
+@IsNotEmpty()
+password: string;
+
+@IsEmail()
 @IsNotEmpty()
 email: string;
 }

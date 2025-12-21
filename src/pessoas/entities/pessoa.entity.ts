@@ -1,1 +1,22 @@
-export class Pessoa {}
+import { Entity, PrimaryGeneratedColumn, Column, CreateDateColumn, UpdateDateColumn  } from 'typeorm';
+
+@Entity()
+export class Pessoa {
+    @PrimaryGeneratedColumn()
+    id: number;
+
+    @Column()
+    nome: string;
+    
+    @Column()
+    email: string;  
+    
+    @Column()
+    password: string;
+
+    @CreateDateColumn()
+    createdAt: Date;
+
+    @UpdateDateColumn()
+    updatedAt: Date;
+}
