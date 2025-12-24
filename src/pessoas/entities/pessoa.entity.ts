@@ -6,7 +6,7 @@ export class Pessoa {
     id: number;
 
     @Column()
-    nome: string;
+    name: string;
     
     @Column()
     email: string;  

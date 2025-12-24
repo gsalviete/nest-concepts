@@ -14,3 +14,15 @@ Content-Type: application/json
     "title" : "Recado Novo",
     "content" : "Conteudo do recado novo" 
 }
+
+
+### Pessoas
+# @name PessoaModulePost
+POST {{baseUrl}}/pessoas
+Content-Type: application/json
+
+{
+    "name": "gabriel",
+    "email": "gabriel@example.com",
+    "password": "123456"
+}

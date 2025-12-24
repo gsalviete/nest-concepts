@@ -1,9 +1,9 @@
-import { IsString, IsNotEmpty, IsNumber, IsEmail } from 'class-validator';
+import { IsString, IsNotEmpty, IsEmail } from 'class-validator';
 
 export class CreatePessoaDto {
 @IsString()
 @IsNotEmpty()
-nome: string;
+name: string;
 
 @IsString()
 @IsNotEmpty()
