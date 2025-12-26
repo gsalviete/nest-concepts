@@ -26,3 +26,10 @@ Content-Type: application/json
     "email": "gabriel@example.com",
     "password": "123456"
 }
+
+### PessoasModuleGet
+# @name PessoaModuleGetAll
+GET {{baseUrl}}/pessoas
+
+# @name PessoaModuleGetOne
+GET {{baseUrl}}/pessoas/1

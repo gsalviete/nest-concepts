@@ -1,13 +1,16 @@
 import { Module } from '@nestjs/common';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
-import { RecadosModule } from 'src/recados/recados.module';
 import { TypeOrmModule } from '@nestjs/typeorm';
+import { RecadosModule } from 'src/recados/recados.module';
 import { Recado } from 'src/recados/entities/recado.entity';
+import { PessoasModule } from 'src/pessoas/pessoas.module';
+import { Pessoa } from 'src/pessoas/entities/pessoa.entity';
 
 @Module({
   imports: [
     RecadosModule,
+    PessoasModule,
     TypeOrmModule.forRoot({
       type: 'postgres',
       host: process.env.DATABASE_HOST,
@@ -15,7 +18,7 @@ import { Recado } from 'src/recados/entities/recado.entity';
       username: process.env.DATABASE_USER || 'postgres',
       password: process.env.DATABASE_PASSWORD || 'postgres',
       database: process.env.DATABASE_NAME || 'nestdb',
-      entities: [Recado],
+      entities: [Recado, Pessoa],
       synchronize: true,
     }),
   ],
