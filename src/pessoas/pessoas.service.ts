@@ -1,4 +1,4 @@
-import { Injectable, NotFoundException } from '@nestjs/common';
+import { ConflictException, Injectable, NotFoundException } from '@nestjs/common';
 import { CreatePessoaDto } from './dto/create-pessoa.dto';
 import { UpdatePessoaDto } from './dto/update-pessoa.dto';
 import { InjectRepository } from '@nestjs/typeorm';
@@ -23,15 +23,25 @@ export class PessoasService {
   }
 
   async create(createPessoaDto: CreatePessoaDto): Promise<Pessoa> {
-    const pessoa = this.pessoaRepository.create(createPessoaDto);
-    return await this.pessoaRepository.save(pessoa);
+    try{const pessoa = this.pessoaRepository.create(createPessoaDto);
+    return await this.pessoaRepository.save(pessoa);}
+    catch(error){
+      if (error.code === '23505') {
+        throw new ConflictException('Email already exists');
+      }
+      throw error;
+    }
   }
 
   update(id: number, updatePessoaDto: UpdatePessoaDto) {
     return `This action updates a #${id} pessoa`;
   }
 
-  remove(id: number) {
-    return `This action removes a #${id} pessoa`;
+  async remove(id: number): Promise<void> {
+    const pessoa = await this.pessoaRepository.findOne({ where: {id}});
+    if(!pessoa){
+      throw new NotFoundException(`Pessoa with id ${id} not found`);
+    }
+    await this.pessoaRepository.remove(pessoa);
   }
 }

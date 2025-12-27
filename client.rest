@@ -22,8 +22,8 @@ POST {{baseUrl}}/pessoas
 Content-Type: application/json
 
 {
-    "name": "gabriel",
-    "email": "gabriel@example.com",
+    "name": "julia",
+    "email": "julia@example.com",
     "password": "123456"
 }
 
@@ -31,5 +31,10 @@ Content-Type: application/json
 # @name PessoaModuleGetAll
 GET {{baseUrl}}/pessoas
 
+### PessoaModuleGetOne
 # @name PessoaModuleGetOne
-GET {{baseUrl}}/pessoas/1
+GET {{baseUrl}}/pessoas/3
+
+### PessoaModuleDelete
+# @name PessoaModuleDelete
+DELETE {{baseUrl}}/pessoas/3
