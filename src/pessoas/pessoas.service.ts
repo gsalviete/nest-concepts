@@ -33,8 +33,15 @@ export class PessoasService {
     }
   }
 
-  update(id: number, updatePessoaDto: UpdatePessoaDto) {
-    return `This action updates a #${id} pessoa`;
+  async update(id: number, updatePessoaDto: UpdatePessoaDto): Promise<Pessoa> {
+    const pessoa = await this.pessoaRepository.preload({
+      id: id,
+      ...updatePessoaDto,
+    });
+    if(!pessoa) {
+      throw new NotFoundException(`Pessoa with id ${id} not found`) 
+    }
+    return await this.pessoaRepository.save(pessoa)
   }
 
   async remove(id: number): Promise<void> {
