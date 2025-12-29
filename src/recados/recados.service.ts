@@ -4,11 +4,13 @@ import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import { Recado } from './entities/recado.entity';
 import { UpdateRecadoDto } from './dto/update-recado.dto';
+import { PessoasService } from '../pessoas/pessoas.service';
 
 @Injectable()
 export class RecadosService {
   constructor(
     @InjectRepository(Recado) private recadoRepository: Repository<Recado>,
+    private pessoasService: PessoasService
   ) {}
 
   throwNotFoundError() {
