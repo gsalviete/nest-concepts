@@ -1,9 +1,12 @@
+import { Pessoa } from 'src/pessoas/entities/pessoa.entity';
 import {
   Column,
   Entity,
   PrimaryGeneratedColumn,
   CreateDateColumn,
   UpdateDateColumn,
+  JoinColumn,
+  ManyToOne,
 } from 'typeorm';
 
 @Entity()
@@ -14,10 +17,12 @@ export class Recado {
   @Column()
   texto: string;
 
-  @Column()
+  @ManyToOne(() => Pessoa)
+  @JoinColumn({ name: 'de' })
   de: string;
 
-  @Column()
+  @ManyToOne(() => Pessoa)
+  @JoinColumn({ name: 'para' })
   para: string;
 
   @Column({ default: false })
