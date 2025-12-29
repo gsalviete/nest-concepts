@@ -6,6 +6,7 @@ import { Recado } from './entities/recado.entity';
 import { UpdateRecadoDto } from './dto/update-recado.dto';
 import { PessoasService } from '../pessoas/pessoas.service';
 import { CreatePessoaDto } from 'src/pessoas/dto/create-pessoa.dto';
+import { ResponseRecadoDto } from './dto/reponse-recado.dto';
 
 @Injectable()
 export class RecadosService {
@@ -30,7 +31,7 @@ export class RecadosService {
     return recado;
   }
 
-  async create(createRecadoDto: CreateRecadoDto): Promise<Recado> {
+  async create(createRecadoDto: CreateRecadoDto): Promise<ResponseRecadoDto> {
     const { deId, paraId } = createRecadoDto;
     const de = await this.pessoasService.findOne(deId);
     const para = await this.pessoasService.findOne(paraId);
@@ -43,7 +44,16 @@ export class RecadosService {
       data: new Date(),
     };
     const recado = this.recadoRepository.create(novoRecado);
-    return await this.recadoRepository.save(recado);
+    await this.recadoRepository.save(recado);
+    return {
+      ...recado,
+      de: {
+        id: recado.de.id
+      },
+      para: {
+        id: recado.para.id 
+      }
+    }; 
   }
 
   async update(id: number, updateRecadoDto: UpdateRecadoDto): Promise<Recado> {

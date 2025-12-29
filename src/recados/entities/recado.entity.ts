@@ -32,8 +32,8 @@ export class Recado {
   data: Date;
 
   @CreateDateColumn()
-  CreatedAt?: Date;
+  createdAt?: Date;
 
   @UpdateDateColumn()
-  UpdatedAt?: Date;
+  updatedAt?: Date;
 }
