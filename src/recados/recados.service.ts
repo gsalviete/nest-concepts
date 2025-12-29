@@ -5,6 +5,7 @@ import { Repository } from 'typeorm';
 import { Recado } from './entities/recado.entity';
 import { UpdateRecadoDto } from './dto/update-recado.dto';
 import { PessoasService } from '../pessoas/pessoas.service';
+import { CreatePessoaDto } from 'src/pessoas/dto/create-pessoa.dto';
 
 @Injectable()
 export class RecadosService {
@@ -30,7 +31,18 @@ export class RecadosService {
   }
 
   async create(createRecadoDto: CreateRecadoDto): Promise<Recado> {
-    const recado = this.recadoRepository.create(createRecadoDto);
+    const { deId, paraId } = createRecadoDto;
+    const de = await this.pessoasService.findOne(deId);
+    const para = await this.pessoasService.findOne(paraId);
+
+    const novoRecado = {
+      texto: createRecadoDto.texto,
+      de: de,
+      para: para,
+      lido: false,
+      data: new Date(),
+    };
+    const recado = this.recadoRepository.create(novoRecado);
     return await this.recadoRepository.save(recado);
   }
 
