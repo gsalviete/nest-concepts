@@ -7,18 +7,24 @@ import {
   Patch,
   Post,
   ParseIntPipe,
+  HttpCode,
+  HttpStatus,
+  Query,
 } from '@nestjs/common';
 import { RecadosService } from './recados.service';
 import { CreateRecadoDto } from './dto/create-recado.dto';
 import { UpdateRecadoDto } from './dto/update-recado.dto';
 import { Recado } from './entities/recado.entity';
+import { PaginationDto } from 'src/common/dto/pagination.dto';
+import { ResponseRecadoDto } from './dto/reponse-recado.dto';
 
 @Controller('recados')
 export class RecadosController {
   constructor(private readonly recadosService: RecadosService) {}
 
+  @HttpCode(HttpStatus.OK)
   @Get()
-  async findAll(): Promise<Recado[]> {
+  async findAll(@Query() paginationDto: PaginationDto): Promise<Recado[]> {
     return this.recadosService.findAll();
   }
 
@@ -28,7 +34,7 @@ export class RecadosController {
   }
 
   @Post()
-  async create(@Body() createRecadoDto: CreateRecadoDto): Promise<Recado> {
+  async create(@Body() createRecadoDto: CreateRecadoDto): Promise<ResponseRecadoDto> {
     return this.recadosService.create(createRecadoDto);
   }
 

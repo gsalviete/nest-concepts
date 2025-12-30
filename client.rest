@@ -1,9 +1,12 @@
 @baseUrl = http://localhost:3000
 
-### RecadosModuleGet
+### RecadosModuleGetAll
+# @name RecadosModuleGetAll
+GET {{baseUrl}}/recados
 
-# @name RecadosModuleGet
-GET {{baseUrl}}/recados/213
+### RecadosModuleGetOne
+# @name RecadosModuleGetOne
+GET {{baseUrl}}/recados/1
 
 ### RecadoModulePost
 # @name RecadoModulePost
@@ -11,9 +14,24 @@ POST {{baseUrl}}/recados
 Content-Type: application/json
 
 {
-    "title" : "Recado Novo",
-    "content" : "Conteudo do recado novo" 
+    "texto": "Conteudo do recado novo",
+    "deId": 1,
+    "paraId": 2
 }
+
+### RecadoModulePatch
+# @name RecadoModulePatch
+PATCH {{baseUrl}}/recados/1
+Content-Type: application/json
+
+{
+    "texto": "Conteudo atualizado",
+    "lido": true
+}
+
+### RecadoModuleDelete
+# @name RecadoModuleDelete
+DELETE {{baseUrl}}/recados/1
 
 
 ### Pessoas

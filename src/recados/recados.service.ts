@@ -20,7 +20,19 @@ export class RecadosService {
   }
 
   async findAll(): Promise<Recado[]> {
-    return await this.recadoRepository.find();
+    return await this.recadoRepository.find({
+      relations: ['de', 'para'],
+      select: {
+        de: {
+          id: true,
+          name: true
+        },
+        para: {
+           id: true,
+          name: true
+        }
+      }
+    });
   }
 
   async findOne(id: number): Promise<Recado> {
@@ -57,14 +69,13 @@ export class RecadosService {
   }
 
   async update(id: number, updateRecadoDto: UpdateRecadoDto): Promise<Recado> {
-    const recado = await this.recadoRepository.preload({
-      id: id,
-      ...updateRecadoDto,
-    });
-    if (!recado) {
-      throw new NotFoundException(`Recado with id ${id} not found`);
-    }
-    return await this.recadoRepository.save(recado);
+    const recado = await this.findOne(id);
+    recado.texto = updateRecadoDto?.texto ?? recado.texto;
+    recado.lido = updateRecadoDto?.lido ?? recado.lido;
+
+    await this.recadoRepository.save(recado);
+
+    return recado;
   }
 
   async remove(id: number): Promise<void> {
