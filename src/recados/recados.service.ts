@@ -7,6 +7,7 @@ import { UpdateRecadoDto } from './dto/update-recado.dto';
 import { PessoasService } from '../pessoas/pessoas.service';
 import { CreatePessoaDto } from 'src/pessoas/dto/create-pessoa.dto';
 import { ResponseRecadoDto } from './dto/reponse-recado.dto';
+import { PaginationDto } from 'src/common/dto/pagination.dto';
 
 @Injectable()
 export class RecadosService {
@@ -19,8 +20,11 @@ export class RecadosService {
     throw new NotFoundException('Recado not found');
   }
 
-  async findAll(): Promise<Recado[]> {
+  async findAll(paginationDto?: PaginationDto): Promise<Recado[]> {
+    const { limit = 10, offset = 0} = paginationDto || {};
     return await this.recadoRepository.find({
+      take: limit, 
+      skip: offset,
       relations: ['de', 'para'],
       select: {
         de: {
