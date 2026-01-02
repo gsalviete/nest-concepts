@@ -19,6 +19,7 @@ import { Recado } from './entities/recado.entity';
 import { PaginationDto } from 'src/common/dto/pagination.dto';
 import { ResponseRecadoDto } from './dto/reponse-recado.dto';
 import { TimingConnection } from 'src/common/interceptors/timing-connection.interceptor';
+import { ErrorHandling } from 'src/common/interceptors/error-handling.interceptor';
 
 @Controller('recados')
 export class RecadosController {
@@ -31,6 +32,7 @@ export class RecadosController {
     return this.recadosService.findAll();
   }
 
+  @UseInterceptors(ErrorHandling)
   @Get(':id')
   async findOne(@Param('id', ParseIntPipe) id: number): Promise<Recado> {
     return this.recadosService.findOne(id);
