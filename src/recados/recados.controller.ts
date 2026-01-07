@@ -20,11 +20,13 @@ import { PaginationDto } from 'src/common/dto/pagination.dto';
 import { ResponseRecadoDto } from './dto/reponse-recado.dto';
 import { TimingConnection } from 'src/common/interceptors/timing-connection.interceptor';
 import { ErrorHandling } from 'src/common/interceptors/error-handling.interceptor';
+import { Cache } from 'src/common/interceptors/cache.interceptor';
 
 @Controller('recados')
 export class RecadosController {
   constructor(private readonly recadosService: RecadosService) {}
 
+  @UseInterceptors(Cache)
   @UseInterceptors(TimingConnection)
   @HttpCode(HttpStatus.OK)
   @Get()
