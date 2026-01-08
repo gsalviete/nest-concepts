@@ -6,12 +6,12 @@ export class Cache implements NestInterceptor {
     
     async intercept(context: ExecutionContext, next: CallHandler<any>) {
         
-        console.log('interceptor being executed');
+        // console.log('interceptor being executed');
         const request = context.switchToHttp().getRequest();
         const url = request.url;
 
         if (this.cache.has(url)){
-            console.log('already in cache')
+            // console.log('already in cache')
             return of (this.cache.get(url))
         }
 
@@ -20,7 +20,7 @@ export class Cache implements NestInterceptor {
         return next.handle().pipe(
             tap(data => {
                 this.cache.set(url, data);
-                console.log('storaged in cache');
+                // console.log('storaged in cache');
             })
         );
     }

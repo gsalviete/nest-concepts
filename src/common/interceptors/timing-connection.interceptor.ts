@@ -7,13 +7,13 @@ export class TimingConnection implements NestInterceptor {
         next: CallHandler<any>
     ){
         const now = Date.now();
-        console.log('timing connection running');
+        // console.log('timing connection running');
 
         await new Promise(resolve => setTimeout(resolve, 3000));
         return next.handle().pipe(
             tap(() => {
                 const finalDate = Date.now() - now;
-                console.log(`next timing connection log with ${finalDate} ms` );
+                // console.log(`next timing connection log with ${finalDate} ms` );
             })
         );
     }
