@@ -1,6 +1,7 @@
-import { CallHandler, ExecutionContext, NestInterceptor } from '@nestjs/common';
+import { CallHandler, ExecutionContext, NestInterceptor, Injectable } from '@nestjs/common';
 import { tap } from 'rxjs';
 
+@Injectable()
 export class TimingConnection implements NestInterceptor {
     async intercept(
         context: ExecutionContext,
