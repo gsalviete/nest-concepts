@@ -26,11 +26,5 @@ import { SimpleMiddleware } from 'src/common/middlewares/simple-middleware';
   controllers: [AppController],
   providers: [ AppService ],
 })
-export class AppModule implements NestModule { 
-  configure(consumer: MiddlewareConsumer) {
-    consumer.apply(SimpleMiddleware).forRoutes({
-      path: 'recados',
-      method: RequestMethod.ALL,
-    })
-  }
-}
+export class AppModule {}
+
