@@ -7,9 +7,6 @@ import { Recado } from 'src/recados/entities/recado.entity';
 import { PessoasModule } from 'src/pessoas/pessoas.module';
 import { Pessoa } from 'src/pessoas/entities/pessoa.entity';
 import { SimpleMiddleware } from 'src/common/middlewares/simple-middleware';
-import { APP_FILTER, APP_GUARD } from '@nestjs/core';
-import { NewExceptionFilter } from 'src/common/filters/new-exception.filter';
-import { IsAdminGuard } from 'src/common/guards/is-admin.guard';
 
 @Module({
   imports: [
@@ -27,17 +24,7 @@ import { IsAdminGuard } from 'src/common/guards/is-admin.guard';
     }),
   ],
   controllers: [AppController],
-  providers: [
-    AppService,
-    {
-      provide: APP_FILTER,
-      useClass: NewExceptionFilter
-    },
-    {
-      provide: APP_GUARD,
-      useClass: IsAdminGuard
-    }
-  ],
+  providers: [ AppService ],
 })
 export class AppModule implements NestModule { 
   configure(consumer: MiddlewareConsumer) {
