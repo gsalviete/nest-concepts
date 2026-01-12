@@ -19,6 +19,7 @@ import { Recado } from './entities/recado.entity';
 import { PaginationDto } from 'src/common/dto/pagination.dto';
 import { ResponseRecadoDto } from './dto/reponse-recado.dto';
 import { ChangeData } from 'src/common/interceptors/change-data.interceptor';
+import { AuthToken } from 'src/common/interceptors/auth-token.interceptor';
 
 @UseInterceptors(ChangeData)
 @Controller('recados')
@@ -26,6 +27,7 @@ export class RecadosController {
   constructor(private readonly recadosService: RecadosService) {}
 
   @HttpCode(HttpStatus.OK)
+  @UseInterceptors(AuthToken)
   @Get()
   async findAll(@Query() paginationDto: PaginationDto): Promise<Recado[]> {
     return this.recadosService.findAll();

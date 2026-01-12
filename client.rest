@@ -3,6 +3,7 @@
 ### RecadosModuleGetAll
 # @name RecadosModuleGetAll
 GET {{baseUrl}}/recados
+Authorization: Bearer SeuTokenAqui
 
 ### RecadosModuleGetOne
 # @name RecadosModuleGetOne
