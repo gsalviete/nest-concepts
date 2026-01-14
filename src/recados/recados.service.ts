@@ -8,12 +8,15 @@ import { PessoasService } from '../pessoas/pessoas.service';
 import { CreatePessoaDto } from 'src/pessoas/dto/create-pessoa.dto';
 import { ResponseRecadoDto } from './dto/reponse-recado.dto';
 import { PaginationDto } from 'src/common/dto/pagination.dto';
-
+import { RecadosUtils } from './recados.utils';
+ 
 @Injectable()
 export class RecadosService {
   constructor(
-    @InjectRepository(Recado) private recadoRepository: Repository<Recado>,
-    private pessoasService: PessoasService
+    @InjectRepository(Recado) 
+    private recadoRepository: Repository<Recado>,
+    private pessoasService: PessoasService,
+    private readonly recadosUtils: RecadosUtils
   ) {}
 
   throwNotFoundError() {
@@ -21,6 +24,8 @@ export class RecadosService {
   }
 
   async findAll(paginationDto?: PaginationDto): Promise<Recado[]> {
+    console.log(this.recadosUtils.reverseString('Gabriel'));
+
     const { limit = 10, offset = 0} = paginationDto || {};
     return await this.recadoRepository.find({
       take: limit, 
@@ -90,3 +95,4 @@ export class RecadosService {
     await this.recadoRepository.remove(recado);
   }
 }
+
