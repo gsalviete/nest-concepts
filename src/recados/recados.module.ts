@@ -8,6 +8,7 @@ import { RecadosUtils } from './recados.utils'
 import { RegexProcotocol } from 'src/common/regex/protocol.regex';
 import { RemoveSpaces } from 'src/common/regex/remove-spaces.regex';
 import { OnlyLowerCase } from 'src/common/regex/only-lowercase.regex';
+import { SERVER_NAME } from 'src/common/constants/server-name';
 
 @Module({
   imports: [TypeOrmModule.forFeature([Recado]), 
@@ -16,8 +17,12 @@ import { OnlyLowerCase } from 'src/common/regex/only-lowercase.regex';
   providers: [RecadosService, RecadosUtils,
     {
       provide: RegexProcotocol,
-      useClass: 1 === 1 ? RemoveSpaces : OnlyLowerCase
+      useClass: 1 !== 1 ? RemoveSpaces : OnlyLowerCase
     },
+    {
+      provide: SERVER_NAME,
+      useValue: 'Hi, my name is Gabriel'
+    }
    ],
   exports: [ 
     {

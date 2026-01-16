@@ -24,7 +24,7 @@ export class RecadosService {
   }
 
   async findAll(paginationDto?: PaginationDto): Promise<Recado[]> {
-    console.log(this.recadosUtils.reverseString('Gabriel'));
+    // console.log(this.recadosUtils.reverseString('Gabriel'));
 
     const { limit = 10, offset = 0} = paginationDto || {};
     return await this.recadoRepository.find({
